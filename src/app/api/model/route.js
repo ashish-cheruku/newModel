@@ -23,7 +23,7 @@ export async function GET() {
         headers: {
           'Content-Type': 'model/gltf-binary',
           'Content-Disposition': `attachment; filename="${filename}"`,
-          'Cache-Control': 'public, max-age=3600' // Cache for 1 hour
+          'Cache-Control': 'public, max-age=1000' 
         }
       });
     } else {

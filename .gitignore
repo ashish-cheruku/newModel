@@ -42,3 +42,7 @@ next-env.d.ts
 
 #files
 public/multiPlantSceneCompress.glb
+public/multiPlantSceneCompressed.glb
+download-glb.js
+upload-glb.js
+compress-and-upload.js
