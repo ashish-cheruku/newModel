@@ -6,7 +6,12 @@ export default function Home() {
       <h1 className="text-4xl md:text-5xl font-semibold text-gray-100 text-center mb-8 tracking-wide">
         3D Model Viewer
       </h1>
-      <ModelViewer />
+      <div className="w-full max-w-6xl">
+        <ModelViewer />
+      </div>
+      <div className="text-gray-400 text-center mt-4 text-sm">
+        Hover over parts of the model to see their names
+      </div>
     </main>
   );
 }

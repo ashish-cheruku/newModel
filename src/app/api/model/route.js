@@ -6,24 +6,24 @@ const pool = new Pool({
   host: process.env.PGHOST,
   database: process.env.PGDATABASE,
   password: process.env.PGPASSWORD,
-  port: process.env.PGPORT, // Changed from DB_PORT to PGPORT to match your .env file
+  port: process.env.PGPORT,
 });
 
 export async function GET() {
   try {
-    // Modified query to match your table structure
-    // You created a 'files' table, not 'models', and the binary data column is named 'data', not 'file_data'
     const result = await pool.query('SELECT data, filename FROM files WHERE id = $1', [1]);
     
     if (result.rows.length > 0) {
       const modelData = result.rows[0].data;
-      const filename = result.rows[0].filename; // Get the actual filename from the database
+      const filename = result.rows[0].filename;
       
+      // Add cache control headers for better performance
       return new NextResponse(modelData, {
         status: 200,
         headers: {
           'Content-Type': 'model/gltf-binary',
-          'Content-Disposition': `attachment; filename="${filename}"`
+          'Content-Disposition': `attachment; filename="${filename}"`,
+          'Cache-Control': 'public, max-age=3600' // Cache for 1 hour
         }
       });
     } else {
